@@ -1,0 +1,198 @@
+﻿<!-- START row 1 card 1(of2) -->
+<div class="col-lg-6">
+    <div class="card">
+        <div style="color:green" class="card-header">
+            <strong>Pridėti</strong> pardavimą
+        </div>
+        <div class="card-body card-block">
+            <!-- START Form -->
+            <!-- def index(request) should check if form is filledfor action! -->
+            <form name="form1" id="form1" method="post" action="{% url 'home:index_home' %}" class="form-horizontal">
+                {% csrf_token %}
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="select" class=" form-control-label">Skonis</label></div>
+                    <div class="col-12 col-md-9">
+                        <select name="select1" id="select" class="form-control">
+                            <!-- <option value="0">Pasirinkite...</option> -->
+                            {% for t in tastes %}
+                            <option {% if forloop.first %}selected{% endif %} value="{{ forloop.counter }}">{{ t }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="select" class=" form-control-label">Kiekis</label></div>
+                    <div class="col-12 col-md-9">
+                        <select name="select2" id="select" class="form-control">
+                            <option value="1">1 vnt.</option>
+                            <option value="2">2 vnt.</option>
+                            <option value="3">3 vnt.</option>
+                            <option value="4">4 vnt.</option>
+                            <option value="5">5 vnt.</option>
+                            <option value="6">6 vnt.</option>
+                            <option value="7">7 vnt.</option>
+                            <option value="8">8 vnt.</option>
+                            <option value="9">9 vnt.</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Tūris</label></div>
+                    <div class="col col-md-9">
+                        <div class="form-check-inline form-check">
+                            {% for v in volumes %}
+                            <label for="inline-radio{{forloop.counter}}" class="form-check-label ">
+                                <input {% if forloop.first %}checked{% endif %} type="radio" id="inline-radio{{forloop.counter}}" name="inline-radios" value="{{ v }}" class="form-check-input">{{ v }} ml
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Stiprumas</label></div>
+                    <div class="col col-md-9">
+                        <div class="form-check-inline form-check">
+                            {% for s in strengths %}
+                            <label for="2inline-radio{{forloop.counter}}" class="form-check-label ">
+                                <input {% if forloop.first %}checked{% endif %} type="radio" id="2inline-radio{{forloop.counter}}" name="2inline-radios" value="{{ s }}" class="form-check-input">{{ s }} mg
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- END Form-->
+        </div>
+        <div class="card-footer">
+            <button form="form1" type="submit" class="btn btn-success btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Patvirtinti
+            </button>
+            <button onclick="document.form1.reset();" type="reset" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Išvalyti
+            </button>
+        </div>
+    </div>
+</div>
+<!-- END row 1 card 1(of2) -->
+<!-- START row 1 card 2(of2) -->
+<div style="min-height: 375px;" class="col-lg-6">
+    <div class="card">
+        <div style="color:green" class="card-header">
+            <strong class="card-title">Paskutiniai pardavimai {% if empty %}<span style="color:#dc3a3a">(tuščias)</span>{% endif %}</strong>
+        </div>
+        <div class="card-body">
+            <form method="delete" action="{% url 'home:index_home' %}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Prieš</th>
+                            <th scope="col">Skonis</th>
+                            <th scope="col">Kaina</th>
+                            <th scope="col">Kita</th>
+                            <th scope="col">Trinti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if not empty %}
+                        {% for item in last_sold_items %}
+                        <tr>
+                            {% for cell in item %}
+                            {% if forloop.first %}
+                            <th scope="row">{{ cell }}</th>
+                            {% else %}
+                            <td>{{ cell }}</td>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- Delete button -->
+                            <td><button name="del_id" value="{{forloop.counter0}}" type="submit" style="border-radius:10px;" class="btn btn-danger"><i href="#" class="fa fa-trash"></i></button></td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END row 1 card 2(of2) -->
+
+<div class="col-lg-6">
+    <h5 style="margin:0 0 10px 20px;">Filtruoti:</h5>
+    {% if filter_status == 2 %}
+    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+        <span class="badge badge-pill badge-danger">Klaida!</span>
+        Duomenis pasirinktam laikui neegzistuoja
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    {% endif %}
+
+    <div class="card border">
+        <div style="color:green;" class="card-header">
+            <strong class="card-title">Pasirinkite datą</strong>
+        </div>
+        <div class="card-body">
+            <form name="form_filter" id="form_filter" method="get" action="/" class="form-inline">
+                <div class="form-group">
+                    <div class="col col-md-3"><label style="text-align:center" for="select" class="form-control-label">Metai:</label></div>
+                    <div class="col-12 col-md-9">
+                        <select name="select_year" id="select_year" class="form-control">
+                            {% for year in year_list %}
+                            <option {% if year_now == year %}selected{% endif %} value="{{ year }}">{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col col-md-3"><label style="text-align:center" for="select" class="form-control-label">Mėnesis:</label></div>
+                    <div class="col-12 col-md-9">
+                        <select name="select_month" id="select_month" class="form-control">
+                            {% for month in month_list %}
+                            <option {% if forloop.counter|stringformat:"i" == month_now %}selected{% endif %} value="{{ forloop.counter }}">{{ month }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            {% for card in filter_cards %}
+            <!-- Card{{ forloop.counter }} -->
+            <div class="col-lg-6">
+                <div style="margin:10px 0 0 0;" class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="{{ card.0 }}"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">{{ card.1 }}</div>
+                                <div class="stat-digit">{{ card.2 }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <h5 style="margin:0 0 10px 20px;">Apžvalga:</h5>
+    {% for info_card in info_cards %}
+    <div {% if forloop.counter|divisibleby:2 %}style="padding:0 0 0 15px;"{% else %}style="padding:0;"{% endif %} class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib"><i class="{{ info_card.0 }}"></i></div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">{{ info_card.1 }}</div>
+                        <div class="stat-digit">{{ info_card.2 }}{% if info_card.0 == 'profit' %}€{% else %}{% endif %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+

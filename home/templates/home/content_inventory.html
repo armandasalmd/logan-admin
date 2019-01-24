@@ -1,0 +1,35 @@
+﻿<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">{{ selected_user|capfirst }} inventorius: {% if empty %}<span style="color:#dc3a3a">(tuščias)</span>{% endif %}</strong>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Skonis</th>
+                        <th scope="col">Tūris</th>
+                        <th scope="col">Stiprumas</th>
+                        <th scope="col">Kiekis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if not empty %}
+                    {% for item in items %}
+                    <tr>
+                        {% for cell in item %}
+                            {% if forloop.first %}
+                            <th scope="row">{{ cell }}</th>
+                            {% else %}
+                            <td>{{ cell }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

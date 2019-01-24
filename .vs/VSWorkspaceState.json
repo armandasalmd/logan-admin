@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\employee",
+    "\\employee\\templates",
+    "\\employee\\templates\\employee",
+    "\\home",
+    "\\home\\templates",
+    "\\home\\templates\\home",
+    "\\static",
+    "\\static\\css",
+    "\\static\\js"
+  ],
+  "SelectedNode": "\\home\\templates\\home\\content_messages.html",
+  "PreviewInSolutionExplorer": true
+}
