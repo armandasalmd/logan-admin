@@ -20,4 +20,4 @@ Closed use administration system that let's an admin to track his sales and view
 ###
 Example
 ###
-![image cant be found](i.imgur.com/Hv4TMJA.png)
+![image cant be found](https://i.gyazo.com/5421aca805ecc76bc578caa2fc79ab2e.png)
