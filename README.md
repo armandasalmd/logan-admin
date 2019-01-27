@@ -4,7 +4,7 @@ Closed use administration system that let's an admin to track his sales and view
 
 ## Built With
 
-* [Django](https://www.djangoproject.com/) - popular web frameworkhero
+* [Django](https://www.djangoproject.com/) - popular web framework
 * [Heroku](https://dashboard.heroku.com/) - host/server provider
 * [Bootstrap](https://getbootstrap.com/) - frontend framework
 * [Sufee template](https://github.com/puikinsh/sufee-admin-dashboard) - by colorlib
