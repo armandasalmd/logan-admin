@@ -24,3 +24,4 @@ Closed use administration system that let's an admin to track his sales and view
 ### Acknowledgement
 
 * This website still has some features to be done
+* Website language: Lithuanian 
