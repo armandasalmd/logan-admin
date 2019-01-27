@@ -17,8 +17,10 @@ Closed use administration system that let's an admin to track his sales and view
 * Regular expressions (RegEx)
 * Launch server for production
 
-###
-Sample page view
-###
+### Sample page view
 
 ![image cant be found](https://i.gyazo.com/5421aca805ecc76bc578caa2fc79ab2e.png)
+
+### Acknowledgement
+
+* This website still has some features to be done
