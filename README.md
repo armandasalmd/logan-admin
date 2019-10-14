@@ -1,6 +1,6 @@
 # Logan admin
 
-Closed use administration system that let's an admin to track his sales and view statistics of given time period
+Private use administration system that let's an admin to track his sales and view statistics/averages for a chosen time period
 
 ## Built With
 
